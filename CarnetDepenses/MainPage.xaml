@@ -12,7 +12,7 @@
         </VerticalStackLayout>
 
         <Label Grid.Row="1" FontSize="18" FontAttributes="Bold"
-           Text="{Binding Total, StringFormat='Total : {0:N0} FCFA'}"/>
+               Text="{Binding Total, StringFormat='Total : {0:N0} FCFA'}"/>
 
         <CollectionView Grid.Row="2" ItemsSource="{Binding Depenses}">
             <CollectionView.ItemTemplate>
@@ -21,15 +21,23 @@
                         <Label Text="{Binding Libelle}" VerticalOptions="Center"/>
                         <Label Grid.Column="1" Text="{Binding Montant}" VerticalOptions="Center"/>
                         <Button Grid.Column="2" Text="X"
-                    CommandParameter="{Binding .}"
-                    Command="{Binding Source={RelativeSource
-                        AncestorType={x:Type vm:DepensesViewModel}},
-                        Path=SupprimerCommand}"/>
+                                CommandParameter="{Binding .}"
+                                Command="{Binding Source={RelativeSource
+                                    AncestorType={x:Type vm:DepensesViewModel}},
+                                    Path=SupprimerCommand}"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- La ligne Grid.Row="3" sera remplie en B6 -->
+        <VerticalStackLayout Grid.Row="3" Spacing="6">
+            <Button Text="Convertir le total en EUR"
+                    Command="{Binding ConvertirCommand}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
+            <Label Text="{Binding TotalConverti}" FontSize="16"/>
+            <Label Text="{Binding Message}"/>
+        </VerticalStackLayout>
+
     </Grid>
 </ContentPage>
